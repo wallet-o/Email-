@@ -1,0 +1,17 @@
+{
+  "name": "email-extractor",
+  "version": "1.0.0",
+  "description": "A tool to extract emails from Google search results and display them on a webpage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "deep-email-validator": "^0.1.21",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}
