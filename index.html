@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Extractor</title>
+  <style>
+    .email { margin: 5px; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Extracted Emails</h1>
+  <button onclick="fetchEmails()">Fetch New Emails</button>
+  <div id="email-list"></div>
+
+  <script>
+    // Fetch emails from the server
+    async function fetchEmails() {
+      const response = await fetch('/fetch-emails');
+      const data = await response.json();
+      loadEmails(); // Reload list after fetching
+    }
+
+    // Load stored emails
+    async function loadEmails() {
+      const response = await fetch('/emails');
+      const emails = await response.json();
+      const emailList = document.getElementById('email-list');
+      emailList.innerHTML = '';
+
+      emails.forEach(email => {
+        const div = document.createElement('div');
+        div.className = 'email';
+        div.innerHTML = `${email} <button onclick="copyToClipboard('${email}')">Copy</button>`;
+        emailList.appendChild(div);
+      });
+    }
+
+    // Copy to clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => alert('Copied: ' + text));
+    }
+
+    // Load emails on page load
+    loadEmails();
+  </script>
+</body>
+  </html>
